@@ -62,9 +62,15 @@
 	const inputs = document.querySelectorAll('.controls input');
 
 	function handleUpdate() {
-		const suffix = this.dataset
+		const suffix = this.dataset.sizing||'' ;
+		//this.dataset = dataset is an object that contains data attributes from that specfic element.(i.e takes multiple attributes and puts it into one object)
+		//because not all datasets have sizing we add || '' as it = or nothing so we do not return undefined and throw errors.
+		document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+		//setting the properties does not work if you do not add px at the end , hence the + suffix at the end.
 	}
-//this.dataset = dataset is an object that contains data attributes from that specfic element.(i.e takes multiple attributes and puts it into one object)
+
+
 	inputs.forEach(input => input.addEventListener('change',handleUpdate));
 	inputs.forEach(input => input.addEventListener('mousemove',handleUpdate));
 	</script>
